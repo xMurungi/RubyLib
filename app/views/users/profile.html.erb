@@ -1,0 +1,31 @@
+<h1>My Profile</h1>
+
+<h2>Currently Borrowed Books</h2>
+
+<% if @current_borrowings.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Due Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% @current_borrowings.each do |borrowing| %>
+        <tr>
+          <td><%= borrowing.book.title %></td>
+          <td><%= borrowing.book.author %></td>
+          <td><%= borrowing.due_date.strftime('%B %d, %Y') %></td>
+          <td>
+            <%= button_to 'Return Book', return_book_path(borrowing.book), method: :post %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>You haven't borrowed any books yet.</p>
+<% end %> 

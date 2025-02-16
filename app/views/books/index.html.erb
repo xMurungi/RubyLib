@@ -1,0 +1,25 @@
+<h1>Library Books</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>ISBN</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= book.title %></td>
+        <td><%= book.author %></td>
+        <td><%= book.isbn %></td>
+        <td><%= book.available? ? 'Available' : 'Borrowed' %></td>
+        <td><%= link_to 'View Details', book_path(book) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table> 

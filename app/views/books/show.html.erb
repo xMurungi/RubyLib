@@ -1,0 +1,17 @@
+<h1><%= @book.title %></h1>
+
+<div>
+  <p><strong>Author:</strong> <%= @book.author %></p>
+  <p><strong>ISBN:</strong> <%= @book.isbn %></p>
+  <p><strong>Status:</strong> <%= @book.available? ? 'Available' : 'Borrowed' %></p>
+  
+  <% if user_signed_in? %>
+    <% if @book.available? %>
+      <%= button_to 'Borrow Book', borrow_book_path(@book), method: :post %>
+    <% elsif @book.current_borrowing&.user == current_user %>
+      <%= button_to 'Return Book', return_book_path(@book), method: :post %>
+    <% end %>
+  <% end %>
+</div>
+
+<%= link_to 'Back to Books', books_path %> 
